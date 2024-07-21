@@ -19,9 +19,9 @@ public class HomologacaoConfig implements CommandLineRunner {
         userRepository.deleteAll();
 
         //Ading users
-        userRepository.save(new User("John", "Doe1"));
-        userRepository.save(new User("Jane", "Doe2"));
-        userRepository.save(new User("Jack", "Doe3"));
-        userRepository.save(new User("Caio", "Doe4"));
+        userRepository.save(new User("John", "Doe1", "12346"));
+        userRepository.save(new User("Jane", "Doe2", "12346"));
+        userRepository.save(new User("Jack", "Doe3", "12346"));
+        userRepository.save(new User("Caio", "Doe4", "12346"));
     }
 }
