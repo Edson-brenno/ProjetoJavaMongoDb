@@ -1,23 +1,24 @@
 package com.spring.Controller;
 
-import com.spring.Dominio.User;
+import com.spring.Controller.Exceptions.FieldInvalidException;
 import com.spring.Dto.UserDto;
 import com.spring.Dto.UserRegisterDto;
 import com.spring.Dto.ReponseStructDto;
-import com.spring.Repository.UserRepository;
 import com.spring.Service.UserService;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserResource {
+public class UserController {
     @Autowired
     private UserService userService;;
 
@@ -31,13 +32,19 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<ReponseStructDto<UserRegisterDto>> addUser(HttpServletRequest request,
-                                                                     @RequestBody UserRegisterDto user) {
+                                                                     @Valid @RequestBody UserRegisterDto user,
+                                                                     BindingResult bindingResult) {
 
-        userService.add(user);
 
-        ReponseStructDto<UserRegisterDto> response = new ReponseStructDto<>(HttpStatus.CREATED, user,
-                "Usuario Criado com sucessp", request.getRequestURI());
+       if(bindingResult.hasFieldErrors()){
+           FieldError fieldError = bindingResult.getFieldError();
+           throw new FieldInvalidException(fieldError.getDefaultMessage(), request.getRequestURI());
+       }
+       userService.add(user);
 
-        return ResponseEntity.ok().body(response);
+       ReponseStructDto<UserRegisterDto> response = new ReponseStructDto<>(HttpStatus.CREATED, user,
+               "Usuario Criado com sucessp", request.getRequestURI());
+
+       return ResponseEntity.ok().body(response);
     }
 }

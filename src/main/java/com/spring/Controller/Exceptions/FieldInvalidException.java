@@ -1,9 +1,16 @@
 package com.spring.Controller.Exceptions;
 
-public class FieldInvalidException extends Exception {
+public class FieldInvalidException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public FieldInvalidException(String fieldError) {
+    private String url;
+
+    public FieldInvalidException(String fieldError, String url) {
         super("Field " + fieldError + " is invalid");
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

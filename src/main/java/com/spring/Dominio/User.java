@@ -1,10 +1,15 @@
 package com.spring.Dominio;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 
 @Document(collection = "user")
 public class User implements Serializable {
@@ -12,8 +17,14 @@ public class User implements Serializable {
 
     @Id
     private String id;
+    @NotBlank(message = "Name is required")
+    @NotNull
+    @Size(min= 2, message = "Name needs to be higher than 2 characters")
     private String name;
+    @Email(message = "Email is required")
     private String email;
+    @NotBlank(message = "Password is required")
+    @Size(min=6, message = "Password needs to have at leat 6 charcters")
     private String password;
 
     public User(){}
