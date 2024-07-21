@@ -1,7 +1,6 @@
 package com.spring.Controller;
 
-import com.spring.Entities.User;
-import jakarta.annotation.Resource;
+import com.spring.Dominio.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

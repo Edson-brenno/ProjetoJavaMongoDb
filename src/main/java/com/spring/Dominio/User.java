@@ -1,4 +1,4 @@
-package com.spring.Entities;
+package com.spring.Dominio;
 
 import java.io.Serializable;
 import java.util.Objects;
