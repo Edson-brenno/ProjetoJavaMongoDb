@@ -16,7 +16,7 @@ import java.io.IOException;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(FieldInvalidException.class)
-    public ResponseEntity<ErrorResponseDto> fieldInvalidException(FieldInvalidException ex, HttpServletRequest request) throws IOException {
+    public ResponseEntity<ErrorResponseDto> fieldInvalidException(FieldInvalidException ex) throws IOException {
 
         ErrorDetailDto errorDetailDto = new ErrorDetailDto(ex.getMessage());
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.BAD_REQUEST, errorDetailDto, ex.getUrl());
