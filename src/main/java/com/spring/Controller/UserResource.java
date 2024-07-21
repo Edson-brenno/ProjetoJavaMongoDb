@@ -16,10 +16,10 @@ public class UserResource {
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = new ArrayList<User>();
-        users.add(new User(1, "Brenno1", "brenno1@gamil.com"));
-        users.add(new User(2, "Brenno2", "brenno2@gamil.com"));
-        users.add(new User(3, "Brenno3", "brenno3@gamil.com"));
-        users.add(new User(4, "Brenno4", "brenno4@gamil.com"));
+        users.add(new User("1", "Brenno1", "brenno1@gamil.com"));
+        users.add(new User("2", "Brenno2", "brenno2@gamil.com"));
+        users.add(new User("3", "Brenno3", "brenno3@gamil.com"));
+        users.add(new User("4", "Brenno4", "brenno4@gamil.com"));
 
         return ResponseEntity.ok().body(users);
     }
