@@ -30,7 +30,8 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<ReponseStructDto<UserRegisterDto>> addUser(HttpServletRequest request, @RequestBody UserRegisterDto user) {
+    public ResponseEntity<ReponseStructDto<UserRegisterDto>> addUser(HttpServletRequest request,
+                                                                     @RequestBody UserRegisterDto user) {
 
         userService.add(user);
 
