@@ -1,6 +1,7 @@
 package com.spring.Service;
 
 import com.spring.Dto.UserDto;
+import com.spring.Dto.UserRegisterDto;
 import com.spring.Repository.UserRepository;
 import com.spring.Dominio.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserService {
         return users.stream().map(UserDto::new).toList();
     }
 
-    public void add(User user) {
-        userRepository.save(user);
+    public void add(UserRegisterDto user) {
+        userRepository.save(new User(user.getName(), user.getEmail(), user.getPassword()));
     }
 }

@@ -30,10 +30,13 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<UserRegisterDto> addUser(@RequestBody UserRegisterDto user) {
+    public ResponseEntity<ReponseStructDto<UserRegisterDto>> addUser(HttpServletRequest request, @RequestBody UserRegisterDto user) {
 
-        userService.add(new User(user.getName(), user.getEmail(), user.getPassword()));
+        userService.add(user);
 
-        return ResponseEntity.ok().body(user);
+        ReponseStructDto<UserRegisterDto> response = new ReponseStructDto<>(HttpStatus.CREATED, user,
+                "Usuario Criado com sucessp", request.getRequestURI());
+
+        return ResponseEntity.ok().body(response);
     }
 }
