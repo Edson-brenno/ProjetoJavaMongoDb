@@ -19,17 +19,12 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserResource {
     @Autowired
-    private UserService userService;
-    @Autowired
-    private ServletContext servletContext;
+    private UserService userService;;
 
     @GetMapping
     public ResponseEntity<ReponseStructDto<List<UserDto>>> getUsers(HttpServletRequest request) {
-        List<User> users = userService.findAll();
-        List<UserDto> usersDto = users.stream().map(UserDto::new).toList();
-
         ReponseStructDto<List<UserDto>> reponse = new ReponseStructDto<>(
-                HttpStatus.OK, usersDto, "Usuários obtidos com sucesso", request.getRequestURI()
+                HttpStatus.OK, userService.findAll(), "Usuários obtidos com sucesso", request.getRequestURI()
         );
         return ResponseEntity.ok().body(reponse);
     }
