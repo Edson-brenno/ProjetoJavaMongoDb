@@ -2,6 +2,7 @@ package com.spring.Controller;
 
 import com.spring.Dominio.User;
 import com.spring.Dto.UserDto;
+import com.spring.Dto.UserRegisterDto;
 import com.spring.Repository.UserRepository;
 import com.spring.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<UserRegisterDto> addUser(@RequestBody UserRegisterDto user) {
 
-        userService.add(user);
+        userService.add(new User(user.getName(), user.getEmail(), user.getPassword()));
 
         return ResponseEntity.ok().body(user);
     }
